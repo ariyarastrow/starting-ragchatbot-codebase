@@ -124,4 +124,3 @@ Lesson 1: [title]
 - always use uv to run the server do not use pip directly
 - make sure to use uv to manage all dependencies
 - use uv to run Python files
-- use uv to run Python files.
