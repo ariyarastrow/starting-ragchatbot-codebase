@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     newChatButton = document.getElementById('newChatButton');
     
     setupEventListeners();
+    setupThemeToggle();
     createNewSession();
     loadCourseStats();
 });
@@ -229,4 +230,40 @@ async function loadCourseStats() {
             courseTitles.innerHTML = '<span class="error">Failed to load courses</span>';
         }
     }
+}
+
+// Theme Toggle Functionality
+function setupThemeToggle() {
+    const themeToggle = document.getElementById('themeToggle');
+    const htmlElement = document.documentElement;
+    
+    // Check for saved theme preference or default to dark mode
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlElement.setAttribute('data-theme', savedTheme);
+    
+    // Toggle theme on button click
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = htmlElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        htmlElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Announce theme change for screen readers
+        const announcement = document.createElement('div');
+        announcement.setAttribute('role', 'status');
+        announcement.setAttribute('aria-live', 'polite');
+        announcement.className = 'sr-only';
+        announcement.textContent = `Switched to ${newTheme} mode`;
+        document.body.appendChild(announcement);
+        setTimeout(() => announcement.remove(), 1000);
+    });
+    
+    // Keyboard navigation support (Enter or Space key)
+    themeToggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            themeToggle.click();
+        }
+    });
 }
