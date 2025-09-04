@@ -64,9 +64,14 @@ body {
     padding: 0;
 }
 
-/* Header - Hidden */
+/* Header */
 header {
-    display: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background: var(--background);
+    border-bottom: 1px solid var(--border-color);
 }
 
 header h1 {
@@ -863,11 +868,16 @@ details[open] .suggested-header::before {
     }
 }
 
+/* Header Separator */
+.header-separator {
+    margin: 0;
+    border: none;
+    border-top: 1px solid var(--border-color);
+    background: var(--border-color);
+}
+
 /* Theme Toggle Button Styles */
 .theme-toggle {
-    position: fixed;
-    top: 1.5rem;
-    right: 1.5rem;
     width: 48px;
     height: 48px;
     border-radius: 50%;
@@ -879,8 +889,8 @@ details[open] .suggested-header::before {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 1000;
     box-shadow: var(--shadow);
+    flex-shrink: 0;
 }
 
 .theme-toggle:hover {
@@ -954,11 +964,13 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Mobile responsive for theme toggle */
+/* Mobile responsive for theme toggle and header */
 @media (max-width: 768px) {
+    header {
+        padding: 1rem 1.5rem;
+    }
+    
     .theme-toggle {
-        top: 1rem;
-        right: 1rem;
         width: 40px;
         height: 40px;
     }
@@ -966,6 +978,10 @@ body {
     .theme-toggle svg {
         width: 20px;
         height: 20px;
+    }
+    
+    header h1 {
+        font-size: 1.3rem;
     }
 }
 
